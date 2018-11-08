@@ -33,7 +33,7 @@ ENV bootnodeId="9d6b515151c990c294e71dd1526e08968c7df360d21f8095ec945f9ff5454734
 ENV bootnodeIp="172.25.0.105"
 
 #여기서 실행
-CMD exec geth --networkid 13525 --verbosity=4 --rpc --rpcapi "eth,web3,personal,net,miner,admin,debug,db" --rpcaddr "0.0.0.0" --rpccorsdomain "*" --syncmode=full --cache 512 --port 30301 --nat extip:0.0.0.0 --maxpeers 50 --bootnodes "enode://$bootnodeId@$bootnodeIp:30301" --ethstats='peernine-signer-1:peerpass@182.162.73.171:3000' --etherbase $address --unlock $address --password /signer.pass --gasprice "0" --mine
+CMD exec geth --networkid 13525 --verbosity=4 --rpc --rpcapi "eth,web3,personal,net,miner,admin,debug,db" --rpcaddr "0.0.0.0" --rpccorsdomain "*" --syncmode=full --cache 512 --port 30301 --nat extip:0.0.0.0 --maxpeers 50 --bootnodes "enode://$bootnodeId@$bootnodeIp:30301" --ethstats='peernine-signer-1:peerpass@172.25.0.104:3000' --etherbase $address --unlock $address --password /signer.pass --gasprice "0" --mine
 
 EXPOSE 8545
 EXPOSE 30303
