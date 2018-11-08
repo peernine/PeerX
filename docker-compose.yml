@@ -1,7 +1,7 @@
 version: "3"
 services:
   peerstats:
-
+    hostname: peerstats
     build:
       context: ./peerstats
     container_name: peerstats
@@ -21,6 +21,7 @@ services:
         ipv4_address: 172.25.0.104
 
   geth-bootnode:
+    hostname: geth-bootnode
     environment:
       - nodekeyhex=c8643de1024605aea4778d9c2d40d3fa73d24993427cf2fc1f9500bc1bac2114
     build:
@@ -43,7 +44,8 @@ services:
       - bootnodeId=9d6b515151c990c294e71dd1526e08968c7df360d21f8095ec945f9ff5454734f198d670c6b63f20796dde702dc1d8e18c92298df6a27c4424ace0b7bb174bd7
       - bootnodeIp=172.25.0.105
     build:
-      context: ./peersigner-1
+      context: ./peersigner
+      dockerfile: Dockerfile-1bb
       args:
         binary: 1.8.17+build15807+xenial
         signer.pass: peerpass
@@ -70,7 +72,8 @@ services:
       - bootnodeId=9d6b515151c990c294e71dd1526e08968c7df360d21f8095ec945f9ff5454734f198d670c6b63f20796dde702dc1d8e18c92298df6a27c4424ace0b7bb174bd7
       - bootnodeIp=172.25.0.105
     build:
-      context: ./peersigner-2
+      context: ./peersigner
+      dockerfile: Dockerfile-599
       args:
         binary: 1.8.17+build15807+xenial
         password: peerpass
@@ -97,7 +100,8 @@ services:
        - bootnodeId=9d6b515151c990c294e71dd1526e08968c7df360d21f8095ec945f9ff5454734f198d670c6b63f20796dde702dc1d8e18c92298df6a27c4424ace0b7bb174bd7
        - bootnodeIp=172.25.0.105
      build:
-       context: ./peersigner-3
+       context: ./peersigner
+       dockerfile: Dockerfile-505
        args:
          binary: 1.8.17+build15807+xenial
          password: peerpass

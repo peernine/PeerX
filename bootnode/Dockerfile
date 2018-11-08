@@ -1,7 +1,3 @@
-#About ubuntu16.04-geth-bootnode
-#FROM ubuntu:16.04
-#MAINTAINER Alex Lee <alex.lee@peernine.co.kr>
-
 FROM ubuntu:xenial
 MAINTAINER Alex Lee <alex.lee@peernine.co.kr>
 
