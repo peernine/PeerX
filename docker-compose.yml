@@ -1,0 +1,139 @@
+version: "3"
+services:
+  peerstats:
+
+    build:
+      context: ./peerstats
+    container_name: peerstats
+    ports:
+      - 3000:3000
+    environment:
+      - WS_SECRET=peerpass
+      - PORT=3000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "10"
+    restart: always
+    networks:
+      chainnet:
+        ipv4_address: 172.25.0.104
+
+  geth-bootnode:
+    environment:
+      - nodekeyhex=c8643de1024605aea4778d9c2d40d3fa73d24993427cf2fc1f9500bc1bac2114
+    build:
+      context: ./bootnode
+      args:
+        binary: 1.8.17+build15807+xenial
+    container_name: bootnode
+    ports:
+      - 30301:30301/udp
+    networks:
+      chainnet:
+        ipv4_address: 172.25.0.105
+
+  peernine-dev-signer-1:
+    hostname: peernine-dev-signer-1
+    depends_on:
+      - geth-bootnode
+    environment:
+      - address=0x1bb7a110f310934efecfbd88db409a73282c1cc1
+      - bootnodeId=9d6b515151c990c294e71dd1526e08968c7df360d21f8095ec945f9ff5454734f198d670c6b63f20796dde702dc1d8e18c92298df6a27c4424ace0b7bb174bd7
+      - bootnodeIp=172.25.0.105
+    build:
+      context: ./peersigner-1
+      args:
+        binary: 1.8.17+build15807+xenial
+        signer.pass: peerpass
+    container_name: peernine-signer-1
+    ports:
+      - 8545:8545
+    healthcheck:
+      test: wget http://localhost:8545
+      interval: 2s
+      timeout: 5s
+      retries: 30
+    volumes:
+      - eth-data-1:/root/.ethash
+    networks:
+      chainnet:
+        ipv4_address: 172.25.0.106
+
+  peernine-dev-signer-2:
+    hostname: peernine-dev-signer-2
+    depends_on:
+      - peernine-dev-signer-1
+    environment:
+      - address=0x599f16e36dc11736a6827b1458e18e1f325181da
+      - bootnodeId=9d6b515151c990c294e71dd1526e08968c7df360d21f8095ec945f9ff5454734f198d670c6b63f20796dde702dc1d8e18c92298df6a27c4424ace0b7bb174bd7
+      - bootnodeIp=172.25.0.105
+    build:
+      context: ./peersigner-2
+      args:
+        binary: 1.8.17+build15807+xenial
+        password: peerpass
+    container_name: peernine-signer-2
+    ports:
+      - 8546:8545
+    healthcheck:
+      test: wget http://localhost:8545
+      interval: 2s
+      timeout: 5s
+      retries: 30
+    volumes:
+     - eth-data-2:/root/.ethash
+    networks:
+      chainnet:
+        ipv4_address: 172.25.0.107
+
+  peernine-dev-signer-3:
+     hostname: peernine-dev-signer-3
+     depends_on:
+       - peernine-dev-signer-2
+     environment:
+       - address=0x5054db3275fde21e93b5d99f81f4d4a215366730
+       - bootnodeId=9d6b515151c990c294e71dd1526e08968c7df360d21f8095ec945f9ff5454734f198d670c6b63f20796dde702dc1d8e18c92298df6a27c4424ace0b7bb174bd7
+       - bootnodeIp=172.25.0.105
+     build:
+       context: ./peersigner-3
+       args:
+         binary: 1.8.17+build15807+xenial
+         password: peerpass
+     container_name: peernine-signer-3
+     ports:
+       - 8547:8545
+     healthcheck:
+       test: wget http://localhost:8545
+       interval: 2s
+       timeout: 5s
+       retries: 30
+     volumes:
+      - eth-data-3:/root/.ethash
+     networks:
+       chainnet:
+         ipv4_address: 172.25.0.108
+
+  geth-explorer:
+    hostname: geth-explorer
+    depends_on:
+      - peernine-dev-signer-1
+    ports:
+      - 8080:8080
+    build:
+      context: ./explorer
+    container_name: geth-explorer
+    networks:
+      chainnet:
+        ipv4_address: 172.25.0.125
+networks:
+  chainnet:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.25.0.0/24
+volumes:
+  eth-data-1:
+  eth-data-2:
+  eth-data-3:
