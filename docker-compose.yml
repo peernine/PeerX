@@ -1,5 +1,25 @@
 version: "3"
 services:
+  peerstats:
+    hostname: peerstats
+    build:
+      context: ./peerstats
+    container_name: peerstats
+    ports:
+      - 3000:3000
+    environment:
+      - WS_SECRET=peerpass
+      - PORT=3000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "10"
+    restart: always
+    networks:
+      chainnet:
+        ipv4_address: 172.25.0.104
+
   geth-bootnode:
     hostname: geth-bootnode
     environment:
