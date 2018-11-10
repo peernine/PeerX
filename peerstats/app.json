@@ -30,7 +30,7 @@
     "env":
     {
       "NODE_ENV"        : "peersigner-1",
-      "RPC_HOST"        : "localhost",
+      "RPC_HOST"        : "172.25.0.106",
       "RPC_PORT"        : "8545",
       "LISTENING_PORT"  : "30303",
       "INSTANCE_NAME"   : "",
@@ -56,7 +56,7 @@
     "env":
     {
       "NODE_ENV"        : "peersigner-2",
-      "RPC_HOST"        : "localhost",
+      "RPC_HOST"        : "172.25.0.107",
       "RPC_PORT"        : "8546",
       "LISTENING_PORT"  : "30303",
       "INSTANCE_NAME"   : "",
@@ -82,7 +82,7 @@
     "env":
     {
       "NODE_ENV"        : "peersigner-3",
-      "RPC_HOST"        : "localhost",
+      "RPC_HOST"        : "172.25.0.108",
       "RPC_PORT"        : "8547",
       "LISTENING_PORT"  : "30303",
       "INSTANCE_NAME"   : "",
