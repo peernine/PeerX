@@ -36,11 +36,11 @@ ENV peerstatport=""
 ENV peerstatsName=""
 
 #여기서 실행
-CMD exec geth --networkid 13525 --verbosity=4 --rpc --rpcapi "eth,web3,personal,net,miner,admin,debug,db" --rpcaddr "0.0.0.0" --rpccorsdomain "*" --syncmode=full --cache 512 --port 30304 --nat extip:0.0.0.0 --maxpeers 50 --bootnodes "enode://$bootnodeId@$bootnodeIp:30301" --ethstats "peernine-signer-2:peerpass@$peerstataddress:$peerstatport" --etherbase $address --unlock $address --password /signer.pass --gasprice "0" --mine
+#CMD exec geth --networkid 13525 --verbosity=4 --rpc --rpcapi "eth,web3,personal,net,miner,admin,debug,db" --rpcaddr "0.0.0.0" --rpccorsdomain "*" --syncmode=full --cache 512 --port 30304 --nat extip:0.0.0.0 --maxpeers 50 --bootnodes "enode://$bootnodeId@$bootnodeIp:30301" --ethstats "peernine-signer-2:peerpass@$peerstataddress:$peerstatport" --etherbase $address --unlock $address --password /signer.pass --gasprice "0" --mine
 #soft 4
 #CMD exec geth --networkid 13525 --nodiscover --rpc --rpcapi "eth,web3,personal,net,miner,admin,debug,db" --rpcaddr "localhost" --rpccorsdomain "*" --nat extip:0.0.0.0 --bootnodes "enode://$bootnodeId@$bootnodeIp:30301" --ethstats "$peerstatsName:peerpass@$peerstataddress:$peerstatport" --etherbase $address --unlock $address --password /signer.pass --gasprice "0" --mine
 
-#CMD exec geth --networkid 13525 --nodiscover --verbosity 6 --rpc --rpcapi "eth,web3,personal,net,miner,admin,debug,db" --rpcaddr "0.0.0.0" --rpccorsdomain "*" --syncmode=full --cache 512 --port 30304 --nat extip:0.0.0.0 --maxpeers 50 --bootnodes "enode://e9cc1bfef384ee56563dcbe1c31be69e2ef918932cd0957a6d85fc7040cb2f33e1c6160489f539256262a4c50e05522579eaaa7023d3315983cd2f8d88de19da@172.25.0.105:30301" --etherbase $address --unlock $address --password /signer.pass --gasprice "0" --mine
+CMD exec geth --networkid 13525 --nodiscover --verbosity 6 --rpc --rpcapi "eth,web3,personal,net,miner,admin,debug,db" --rpcaddr "0.0.0.0" --rpccorsdomain "*" --syncmode=full --cache 512 --port 30304 --nat extip:0.0.0.0 --maxpeers 50 --bootnodes "enode://$bootnodeId@$bootnodeIp:30301" --etherbase $address --unlock $address --password /signer.pass --gasprice "0" --mine
 
 
 EXPOSE 8545
