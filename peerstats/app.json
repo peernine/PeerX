@@ -35,7 +35,7 @@
       "LISTENING_PORT"  : "30303",
       "INSTANCE_NAME"   : "",
       "CONTACT_DETAILS" : "",
-      "WS_SERVER"       : "wss://172.25.0.104:3000",
+      "WS_SERVER"       : "ws://172.25.0.104:3000",
       "WS_SECRET"       : "peerpass",
       "VERBOSITY"       : 2
     }
@@ -61,7 +61,7 @@
       "LISTENING_PORT"  : "30303",
       "INSTANCE_NAME"   : "",
       "CONTACT_DETAILS" : "",
-      "WS_SERVER"       : "wss://172.25.0.104:3000",
+      "WS_SERVER"       : "ws://172.25.0.104:3000",
       "WS_SECRET"       : "peerpass",
       "VERBOSITY"       : 2
     }
@@ -87,7 +87,7 @@
       "LISTENING_PORT"  : "30303",
       "INSTANCE_NAME"   : "",
       "CONTACT_DETAILS" : "",
-      "WS_SERVER"       : "wss://172.25.0.104:3000",
+      "WS_SERVER"       : "ws://172.25.0.104:3000",
       "WS_SECRET"       : "peerpass",
       "VERBOSITY"       : 2
     }

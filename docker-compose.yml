@@ -23,14 +23,18 @@ services:
   geth-bootnode:
     hostname: geth-bootnode
     environment:
-      - nodekeyhex=c8643de1024605aea4778d9c2d40d3fa73d24993427cf2fc1f9500bc1bac2114
+      #- nodekeyhex=c8643de1024605aea4778d9c2d40d3fa73d24993427cf2fc1f9500bc1bac2114
+      - nodekeyhex=53cff0434e7c1c0f946848db7bcf56d7fe700b524ebd3b134e047487d44690fb
+      - bootnodeIp=172.25.0.105
     build:
       context: ./bootnode
       args:
         binary: 1.8.17+build15807+xenial
     container_name: bootnode
     ports:
+      - 30301:30301
       - 30301:30301/udp
+      
     networks:
       chainnet:
         ipv4_address: 172.25.0.105
@@ -41,8 +45,12 @@ services:
       - geth-bootnode
     environment:
       - address=0x1bb7a110f310934efecfbd88db409a73282c1cc1
-      - bootnodeId=a163d57127487a3d3403d6f655b2f36162f0da7bfb92627a26f3634dc9e349d9da05cec8bb04f69b89fd62f4f981b2d305cc5c84f68959397ad9b49a594827f0
+      #- bootnodeId=a163d57127487a3d3403d6f655b2f36162f0da7bfb92627a26f3634dc9e349d9da05cec8bb04f69b89fd62f4f981b2d305cc5c84f68959397ad9b49a594827f0
+      - bootnodeId=e9cc1bfef384ee56563dcbe1c31be69e2ef918932cd0957a6d85fc7040cb2f33e1c6160489f539256262a4c50e05522579eaaa7023d3315983cd2f8d88de19da
       - bootnodeIp=172.25.0.105
+      - peerstataddress=172.25.0.104
+      - peerstatport=3000       
+      - peerstatsName="peernine-signer-1" 
     build:
       context: ./peersigner
       dockerfile: Dockerfile-1bb
@@ -52,6 +60,8 @@ services:
     container_name: peernine-signer-1
     ports:
       - 8545:8545
+      - 30303:30303
+      - 30303:30303/udp
     healthcheck:
       test: wget http://localhost:8545
       interval: 2s
@@ -69,8 +79,12 @@ services:
       - peernine-dev-signer-1
     environment:
       - address=0x599f16e36dc11736a6827b1458e18e1f325181da
-      - bootnodeId=a163d57127487a3d3403d6f655b2f36162f0da7bfb92627a26f3634dc9e349d9da05cec8bb04f69b89fd62f4f981b2d305cc5c84f68959397ad9b49a594827f0
+      #- bootnodeId=a163d57127487a3d3403d6f655b2f36162f0da7bfb92627a26f3634dc9e349d9da05cec8bb04f69b89fd62f4f981b2d305cc5c84f68959397ad9b49a594827f0
+      - bootnodeId=e9cc1bfef384ee56563dcbe1c31be69e2ef918932cd0957a6d85fc7040cb2f33e1c6160489f539256262a4c50e05522579eaaa7023d3315983cd2f8d88de19da
       - bootnodeIp=172.25.0.105
+      - peerstataddress=172.25.0.104
+      - peerstatport=3000  
+      - peerstatsName="peernine-signer-2" 
     build:
       context: ./peersigner
       dockerfile: Dockerfile-599
@@ -80,6 +94,8 @@ services:
     container_name: peernine-signer-2
     ports:
       - 8546:8545
+      - 30304:30304
+      - 30304:30304/udp
     healthcheck:
       test: wget http://localhost:8545
       interval: 2s
@@ -97,8 +113,12 @@ services:
        - peernine-dev-signer-2
      environment:
        - address=0x5054db3275fde21e93b5d99f81f4d4a215366730
-       - bootnodeId=a163d57127487a3d3403d6f655b2f36162f0da7bfb92627a26f3634dc9e349d9da05cec8bb04f69b89fd62f4f981b2d305cc5c84f68959397ad9b49a594827f0
+       #- bootnodeId=a163d57127487a3d3403d6f655b2f36162f0da7bfb92627a26f3634dc9e349d9da05cec8bb04f69b89fd62f4f981b2d305cc5c84f68959397ad9b49a594827f0
+       - bootnodeId=e9cc1bfef384ee56563dcbe1c31be69e2ef918932cd0957a6d85fc7040cb2f33e1c6160489f539256262a4c50e05522579eaaa7023d3315983cd2f8d88de19da
        - bootnodeIp=172.25.0.105
+       - peerstataddress=172.25.0.104
+       - peerstatport=3000  
+       - peerstatsName="peernine-signer-3" 
      build:
        context: ./peersigner
        dockerfile: Dockerfile-505
@@ -108,6 +128,8 @@ services:
      container_name: peernine-signer-3
      ports:
        - 8547:8545
+       - 30305:30305
+       - 30305:30305/udp
      healthcheck:
        test: wget http://localhost:8545
        interval: 2s

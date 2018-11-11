@@ -43,8 +43,16 @@ ARG binary
 RUN apt-get update \
      && apt-get install -y ethereum=$binary
 
-ENV nodekeyhex=""
-CMD exec bootnode -nodekeyhex $nodekeyhex
+#ARG bootnode.pass
+#RUN echo $bootnode.pass > bootnode.key
 
+#RUN perl -p -e "s|:\n|:|" bootnode.key
+
+ENV nodekeyhex=""
+CMD exec bootnode -nodekeyhex $nodekeyhex -verbosity 9 -addr $bootnodeIp:30301
+#CMD exec bootnode -nodekey bootnode.key -verbosity 9 -addr $bootnodeIp:30301
+
+
+EXPOSE 30301
 EXPOSE 30301/udp
-EXPOSE 30303/udp
+
