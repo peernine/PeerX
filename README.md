@@ -1,5 +1,5 @@
 # Local Ethereum Network
-세 개의 노드와 모니터가있는 로컬 Ethereum 네트워크를 만드는 일련의 Docker 이미지. 이것은 로컬 Ethereum 네트워크를 설정하고 로컬 테스트 환경을 제공하는 방법을 이해하기 위해 작성되었습니다. ** docker-compose.yml에는 편의를 위해 하드 코딩 된 암호와 개인 키가 포함되어 있으므로 생산 환경에서는 사용하지 마십시오 **
+세 개의 노드와 모니터가있는 로컬 Ethereum 네트워크를 만드는 일련의 Docker 이미지. 이것은 로컬 Ethereum 네트워크를 설정하고 로컬 테스트 환경을 제공하는 방법을 이해하기 위해 작성되었습니다.
 
 ## Usage
 이 네트워크를 설정하려면 Docker를 설치해야합니다. 저장소를 복제하고, 저장소 루트에서`docker-compose up`을 실행하십시오. 추가 구성없이 네트워크가 시작되고 동기화되어야합니다. 네트워크는 go-ethereum 1.18.15와 0.3.4를 사용하며 네트워크는 Ethereum Rinkeby testnet과 비슷한 권한 증명 증명을 위해 설정됩니다. clique POA에 대한 자세한 내용은 https://github.com/ethereum/EIPs/issues/225를 참조하십시오.
