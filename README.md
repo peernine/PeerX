@@ -1,5 +1,5 @@
 # Local Ethereum Network
-세 개의 노드와 모니터가있는 로컬 Ethereum 네트워크를 만드는 일련의 Docker 이미지. 이것은 로컬 Ethereum 네트워크를 설정하고 로컬 테스트 환경을 제공하는 방법을 이해하기 위해 작성되었습니다. ** docker-compose.yml에는 편의를 위해 하드 코딩 된 암호와 개인 키가 포함되어 있으므로 생산 환경에서는 사용하지 마십시오 **
+세 개의 노드와 모니터가있는 로컬 Ethereum 네트워크를 만드는 일련의 Docker 이미지. 이것은 로컬 Ethereum 네트워크를 설정하고 로컬 테스트 환경을 제공하는 방법을 이해하기 위해 작성되었습니다.
 
 ## Usage
 이 네트워크를 설정하려면 Docker를 설치해야합니다. 저장소를 복제하고, 저장소 루트에서`docker-compose up`을 실행하십시오. 추가 구성없이 네트워크가 시작되고 동기화되어야합니다. 네트워크는 go-ethereum 1.18.15와 0.3.4를 사용하며 네트워크는 Ethereum Rinkeby testnet과 비슷한 권한 증명 증명을 위해 설정됩니다. clique POA에 대한 자세한 내용은 https://github.com/ethereum/EIPs/issues/225를 참조하십시오.
@@ -15,9 +15,6 @@
 * [http://localhost:8545](http://localhost:8545) - geth-miner-1
 * [http://localhost:8546](http://localhost:8546) - geth-miner-2
 * [http://localhost:8547](http://localhost:8547) - geth-miner-3
-
-## Swarm (/BZZ:/)
-Swarm은 분산 스토리지 플랫폼이자 컨텐츠 배포 서비스로, ethereum web3 스택의 기본 기본 계층 서비스입니다. Swarm의 주요 목표는 Ethereum의 공공 기록을 충분히 분산하고 여분으로 저장하는 것입니다. 특히 덤프 코드와 데이터는 물론 블록 체인 데이터를 저장하고 배포하는 것이 좋습니다. 경제적 인면에서 볼 때 참가자들은 Ethereum이 인센티브를 받으면서 네트워크의 모든 참여자에게 이러한 서비스를 제공하기 위해 스토리지 및 대역폭 리소스를 효율적으로 풀링 할 수 있습니다. 군중의 파일은 KECCAK256 체크섬으로 표시됩니다.
 
 
 ## Monitoring
