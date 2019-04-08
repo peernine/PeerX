@@ -36,20 +36,20 @@ services:
       chainnet:
         ipv4_address: 172.25.0.105
 
-  peernine-dev-signer-1:
-    hostname: peernine-dev-signer-1
+  peernode-auth-1:
+    hostname: peernode-auth-1
     depends_on:
       - peerboot
     environment:
       - address=0x1bb7a110f310934efecfbd88db409a73282c1cc1
       - bootnodeId=e9cc1bfef384ee56563dcbe1c31be69e2ef918932cd0957a6d85fc7040cb2f33e1c6160489f539256262a4c50e05522579eaaa7023d3315983cd2f8d88de19da
       - bootnodeIp=172.25.0.105
+
       - peerstataddress=172.25.0.104
       - peerstatport=3000       
-      - peerstatsName="peernine-signer-1" 
     build:
       context: ./peersigner
-      dockerfile: Dockerfile-1bb
+      dockerfile: Dockerfile-node1
       args:
         binary: 1.8.17+build15807+xenial
         signer.pass: peerpass
@@ -58,95 +58,69 @@ services:
       - 8545:8545
       - 30303:30303
       - 30303:30303/udp
-    healthcheck:
-      test: wget http://localhost:8545
-      interval: 2s
-      timeout: 5s
-      retries: 30
+
     volumes:
-      - eth-data-1:/root/.ethash
+      - peer-data-1:/root/.ethash
     networks:
       chainnet:
         ipv4_address: 172.25.0.106
 
-  peernine-dev-signer-2:
-    hostname: peernine-dev-signer-2
+  peernode-auth-2:
+    hostname: peernode-auth-2
     depends_on:
-      - peernine-dev-signer-1
+      - peernode-auth-1
     environment:
       - address=0x599f16e36dc11736a6827b1458e18e1f325181da
       - bootnodeId=e9cc1bfef384ee56563dcbe1c31be69e2ef918932cd0957a6d85fc7040cb2f33e1c6160489f539256262a4c50e05522579eaaa7023d3315983cd2f8d88de19da
       - bootnodeIp=172.25.0.105
+
       - peerstataddress=172.25.0.104
       - peerstatport=3000  
-      - peerstatsName="peernine-signer-2" 
     build:
       context: ./peersigner
-      dockerfile: Dockerfile-599
+      dockerfile: Dockerfile-node2
       args:
-        binary: 1.8.17+build15807+xenial
         password: peerpass
     container_name: peernine-signer-2
     ports:
       - 8546:8545
       - 30304:30304
       - 30304:30304/udp
-    healthcheck:
-      test: wget http://localhost:8545
-      interval: 2s
-      timeout: 5s
-      retries: 30
+
     volumes:
-     - eth-data-2:/root/.ethash
+     - peer-data-2:/root/.ethash
     networks:
       chainnet:
         ipv4_address: 172.25.0.107
 
-  peernine-dev-signer-3:
-     hostname: peernine-dev-signer-3
+  peernode-auth-3:
+     hostname: peernode-auth-3
      depends_on:
-       - peernine-dev-signer-2
+       - peernode-auth-2
      environment:
        - address=0x5054db3275fde21e93b5d99f81f4d4a215366730
        - bootnodeId=e9cc1bfef384ee56563dcbe1c31be69e2ef918932cd0957a6d85fc7040cb2f33e1c6160489f539256262a4c50e05522579eaaa7023d3315983cd2f8d88de19da
        - bootnodeIp=172.25.0.105
+
        - peerstataddress=172.25.0.104
        - peerstatport=3000  
-       - peerstatsName="peernine-signer-3" 
      build:
        context: ./peersigner
-       dockerfile: Dockerfile-505
+       dockerfile: Dockerfile-node3
        args:
-         binary: 1.8.17+build15807+xenial
          password: peerpass
      container_name: peernine-signer-3
      ports:
        - 8547:8545
        - 30305:30305
        - 30305:30305/udp
-     healthcheck:
-       test: wget http://localhost:8545
-       interval: 2s
-       timeout: 5s
-       retries: 30
+
      volumes:
-      - eth-data-3:/root/.ethash
+      - peer-data-3:/root/.ethash
      networks:
        chainnet:
          ipv4_address: 172.25.0.108
 
-  geth-explorer:
-    hostname: geth-explorer
-    depends_on:
-      - peernine-dev-signer-1
-    ports:
-      - 8080:8080
-    build:
-      context: ./explorer
-    container_name: geth-explorer
-    networks:
-      chainnet:
-        ipv4_address: 172.25.0.125
 networks:
   chainnet:
     driver: bridge
@@ -154,6 +128,6 @@ networks:
       config:
       - subnet: 172.25.0.0/24
 volumes:
-  eth-data-1:
-  eth-data-2:
-  eth-data-3:
+  peer-data-1:
+  peer-data-2:
+  peer-data-3:

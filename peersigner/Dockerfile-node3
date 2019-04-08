@@ -1,0 +1,35 @@
+FROM ubuntu:xenial
+
+RUN apt-get update \
+     && apt-get install -y software-properties-common \
+     && rm -rf /var/lib/apt/lists/*
+
+RUN add-apt-repository -y ppa:ethereum/ethereum
+
+RUN apt-get update \
+     && apt-get install -y ethereum
+
+ARG signer.pass
+
+RUN echo $signer.pass > /signer.pass
+
+ADD genesis.json /genesis.json
+ADD signer-node3.json /signer.json
+ADD signer.pass /signer.pass
+
+RUN geth --cache 512 init genesis.json
+RUN echo mkdir -p /root/.ethereum/keystore/
+RUN cp /signer.json /root/.ethereum/keystore/
+
+ENV address=""
+ENV bootnodeId=""
+ENV bootnodeIp=""
+
+ENV peerstataddress=""
+ENV peerstatport=""
+
+CMD exec geth --networkid 13525 --verbosity=4 --rpc --rpcapi "eth,web3,personal,net,miner,admin,debug,db" --rpcaddr "0.0.0.0" --rpccorsdomain "*" --syncmode=full --cache 512 --port 30305 --nat extip:0.0.0.0 --maxpeers 50 --bootnodes "enode://$bootnodeId@$bootnodeIp:30301" --ethstats "PeerX Auth Node3:peerpass@$peerstataddress:$peerstatport" --etherbase $address --unlock $address --password /signer.pass --gasprice "0" --mine
+
+EXPOSE 8545
+EXPOSE 30305
+EXPOSE 30305/udp

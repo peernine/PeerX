@@ -2,7 +2,7 @@ FROM ubuntu:xenial
 MAINTAINER Alex Lee <alex.lee@peernine.co.kr>
 
 RUN apt-get update \
-     && apt-get install -y wget software-properties-common \
+     && apt-get install -y software-properties-common \
      && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update -y \
